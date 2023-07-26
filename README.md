@@ -1,9 +1,10 @@
 ## Getting Started
 
-In this project you will learn how to use a module inside your class:
+In this project you will learn how to:
 
-- Use Ruby syntax for basic programming operations.
-- Apply Ruby best practices and language style guides in code.
+- Implement classes and objects in Ruby.
+- Implement encapsulation and inheritance with Ruby.
+- Run a program using the command line.
 
 <a name="readme-top"></a>
 
@@ -28,9 +29,9 @@ In this project you will learn how to use a module inside your class:
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [enumerate] <a name="about-project"></a>
+# 📖 [OOP school library] <a name="about-project"></a>
 
-**[enumerate]** In this project you will learn how to use a module inside your class.
+**[OOP school library]** This is an Object Oriented Programming Ruby project.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -46,13 +47,13 @@ In this project you will learn how to use a module inside your class:
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-Enumerate Practice
+OOP school library
 
 ### Prerequisites
 
 In order to run this project you need:
 
-Ruby 3.0.1
+Ruby 3.0.1 or above
 
 ### Setup
 
@@ -65,7 +66,7 @@ You don't need to install this project.
 
 ### Usage
 
-run ruby enumerate.rb
+run ruby school_library.rb
 
 ### Run tests
 
@@ -86,12 +87,6 @@ No deployment implemented yet
 - GitHub: [@EmiLoKiJu](https://github.com/EmiLoKiJu)
 - Twitter: [@GabrielRozas12](https://twitter.com/GabrielRozas12)
 - LinkedIn: [grozas](https://www.linkedin.com/in/grozas/)
-
-👤 **Marco Baquero**
-
-- GitHub: [@mrcbq](https://github.com/mrcbq)
-- Twitter: [@mrcbq](https://twitter.com/mrcbq)
-- LinkedIn: [mrcbq](https://www.linkedin.com/in/mrcbq/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
