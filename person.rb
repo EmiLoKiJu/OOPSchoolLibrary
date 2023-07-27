@@ -1,14 +1,15 @@
 require 'securerandom'
+require_relative 'nameable'
 
-class Person
+class Person < Nameable
+  attr_reader :id, :name, :age
+  
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
     @id = SecureRandom.uuid
     @name = name
     @age = age
     @parent_permission = parent_permission
   end
-
-  attr_reader :id, :name, :age
 
   def rename(name)
     @name = name
@@ -20,6 +21,10 @@ class Person
 
   def can_use_services?
     of_age? || @parent_permission
+  end
+
+  def correct_name
+    @name
   end
 
   private
