@@ -33,7 +33,6 @@ def main(app = nil)
     end
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
 
 def menu
@@ -159,7 +158,6 @@ def show_books(app)
   puts "\n"
 end
 
-# rubocop:disable Metrics/CyclomaticComplexity
 def show_people(app)
   if app.people.empty?
     puts 'No people in the app yet'
