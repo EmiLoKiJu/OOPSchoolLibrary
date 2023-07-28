@@ -58,7 +58,7 @@ def insert_person(app)
       puts "\n"
       return
     end
-    print 'Give me the name [Input the name]: '
+    print 'Name [Input the name]: '
     name = gets.chomp
     print 'Has parent permission? [Y/N]: '
     parent_permission = gets.chomp
