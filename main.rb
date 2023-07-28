@@ -167,7 +167,7 @@ def show_people(app)
     app&.people&.each do |person|
       if person.is_a?(Student)
         puts "[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      else person.is_a?(Teacher)
+      else
         puts "[Teacher] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       end
     end
