@@ -33,7 +33,7 @@ def main(app = nil)
     end
   end
 end
-
+# rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
 
 def menu
@@ -75,7 +75,7 @@ def insert_teacher(app, age)
   puts "\n"
 end
 
-def is_age_zero(age)
+def age_zero?(age)
   if age.zero?
     puts "invalid age. Please try again\n"
     true
@@ -91,11 +91,11 @@ def insert_person(app)
   when 1
     print 'You want to create a student. Give me the age [Input the number for age]: '
     age = gets.chomp.to_i
-    is_age_zero(age) ? return : insert_student(app, age)
+    age_zero?(age) ? return : insert_student(app, age)
   when 2
     print 'You want to create a teacher. Give me the age [Input the number for age]: '
     age = gets.chomp.to_i
-    is_age_zero(age) ? return : insert_teacher(app, age)
+    age_zero?(age) ? return : insert_teacher(app, age)
   else
     puts 'Invalid choice. Please try again'
   end
@@ -159,6 +159,7 @@ def show_books(app)
   puts "\n"
 end
 
+# rubocop:disable Metrics/CyclomaticComplexity
 def show_people(app)
   if app.people.empty?
     puts 'No people in the app yet'
@@ -176,6 +177,7 @@ def show_people(app)
   end
   puts "\n"
 end
+# rubocop:enable Metrics/CyclomaticComplexity
 
 def show_books_with_index(app)
   app.books.each_with_index do |book, index|
@@ -197,4 +199,3 @@ end
 
 puts 'Welcome to School Library App!'
 main(@app)
-# rubocop:enable Metrics/CyclomaticComplexity
