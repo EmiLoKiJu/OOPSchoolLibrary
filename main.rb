@@ -33,7 +33,7 @@ def main(app = nil)
     end
   end
 end
-# rubocop:enable Metrics/CyclomaticComplexity
+
 # rubocop:enable Metrics/MethodLength
 
 def menu
@@ -75,6 +75,15 @@ def insert_teacher(app, age)
   puts "\n"
 end
 
+def is_age_zero(age)
+  if age.zero?
+    puts "invalid age. Please try again\n"
+    true
+  else
+    false
+  end
+end
+
 def insert_person(app)
   print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
   choice2 = gets.chomp.to_i
@@ -82,19 +91,11 @@ def insert_person(app)
   when 1
     print 'You want to create a student. Give me the age [Input the number for age]: '
     age = gets.chomp.to_i
-    if age.zero?
-      puts "invalid age. Please try again\n"
-      return
-    end
-    insert_student(app, age)
+    is_age_zero(age) ? return : insert_student(app, age)
   when 2
     print 'You want to create a teacher. Give me the age [Input the number for age]: '
     age = gets.chomp.to_i
-    if age.zero?
-      puts "invalid age. Please try again\n"
-      return
-    end
-    insert_teacher(app, age)
+    is_age_zero(age) ? return : insert_teacher(app, age)
   else
     puts 'Invalid choice. Please try again'
   end
@@ -113,12 +114,10 @@ end
 
 def insert_rental(app)
   if app.people.empty?
-    puts 'No people in the app yet. Add some people first to make a rental'
-    puts "\n"
+    puts "No people in the app yet. Add some people first to make a rental\n"
     return
   elsif app.books.empty?
-    puts 'No books in the app yet. Add some books first to make a rental'
-    puts "\n"
+    puts "No books in the app yet. Add some books first to make a rental\n"
     return
   end
   puts 'Select a book from the following list by number'
@@ -130,9 +129,7 @@ def insert_rental(app)
   print 'Give me the date [Input the date in format YYYY/MM/DD]: '
   date = gets.chomp
   app.create_rental(date, app.books[book_index], app.people[people_index])
-  puts "\n"
-  puts 'Rental created successfully'
-  puts "\n"
+  puts "\nRental created successfully\n"
 end
 
 def show_rentals_by_id(app)
@@ -200,3 +197,4 @@ end
 
 puts 'Welcome to School Library App!'
 main(@app)
+# rubocop:enable Metrics/CyclomaticComplexity
