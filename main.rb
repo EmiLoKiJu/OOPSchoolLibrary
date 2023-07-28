@@ -7,12 +7,12 @@ require_relative 'app'
 
 @app = App.new
 
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/MethodLength
 def main(app = nil)
-  puts 'Welcome to School Library App!'
   loop do
     menu
     choice = gets.chomp.to_i
-    puts "\n"
     case choice
     when 1
       show_books(app)
@@ -33,6 +33,8 @@ def main(app = nil)
     end
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength
 
 def menu
   puts 'Please choose an option by entering a number:'
@@ -46,6 +48,33 @@ def menu
   print "\nEnter your choice: "
 end
 
+def insert_student(app, age)
+  print 'Name [Input the name]: '
+  name = gets.chomp
+  print 'Has parent permission? [Y/N]: '
+  parent_permission = gets.chomp
+  case parent_permission
+  when 'Y'
+    app.create_student(name, age, nil, parent_permission: true)
+  when 'N'
+    app.create_student(name, age, nil, parent_permission: false)
+  else
+    puts 'Invalid choice. Please try again'
+  end
+  puts "\nPerson created successfully\n"
+end
+
+def insert_teacher(app, age)
+  print 'Give me the name [Input the name]: '
+  name = gets.chomp
+  print 'Give me the specialization [Input the specialization]: '
+  spec = gets.chomp
+  app.create_teacher(name, age, spec)
+  puts "\n"
+  puts 'Person created successfully'
+  puts "\n"
+end
+
 def insert_person(app)
   print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
   choice2 = gets.chomp.to_i
@@ -54,44 +83,18 @@ def insert_person(app)
     print 'You want to create a student. Give me the age [Input the number for age]: '
     age = gets.chomp.to_i
     if age.zero?
-      puts 'invalid age. Please try again'
-      puts "\n"
+      puts "invalid age. Please try again\n"
       return
     end
-    print 'Name [Input the name]: '
-    name = gets.chomp
-    print 'Has parent permission? [Y/N]: '
-    parent_permission = gets.chomp
-    case parent_permission
-    when 'Y'
-      app.create_student(name, age, nil, parent_permission: true)
-      puts "\n"
-      puts 'Person created successfully'
-      puts "\n"
-    when 'N'
-      app.create_student(name, age, nil, parent_permission: false)
-      puts "\n"
-      puts 'Person created successfully'
-      puts "\n"
-    else
-      puts 'Invalid choice. Please try again'
-    end
+    insert_student(app, age)
   when 2
     print 'You want to create a teacher. Give me the age [Input the number for age]: '
     age = gets.chomp.to_i
     if age.zero?
-      puts 'invalid age. Please try again'
-      puts "\n"
+      puts "invalid age. Please try again\n"
       return
     end
-    print 'Give me the name [Input the name]: '
-    name = gets.chomp
-    print 'Give me the specialization [Input the specialization]: '
-    spec = gets.chomp
-    app.create_teacher(name, age, spec)
-    puts "\n"
-    puts 'Person created successfully'
-    puts "\n"
+    insert_teacher(app, age)
   else
     puts 'Invalid choice. Please try again'
   end
@@ -195,4 +198,5 @@ def show_people_with_index(app)
   end
 end
 
+puts 'Welcome to School Library App!'
 main(@app)
