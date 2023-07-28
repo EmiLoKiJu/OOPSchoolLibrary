@@ -33,6 +33,7 @@ def main(app = nil)
     end
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/MethodLength
 
 def menu
@@ -166,16 +167,13 @@ def show_people(app)
     app&.people&.each do |person|
       if person.is_a?(Student)
         puts "[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      elsif person.is_a?(Teacher)
+      else person.is_a?(Teacher)
         puts "[Teacher] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-      else
-        puts "#{person.name} (#{person.age} years old)"
       end
     end
   end
   puts "\n"
 end
-# rubocop:enable Metrics/CyclomaticComplexity
 
 def show_books_with_index(app)
   app.books.each_with_index do |book, index|
