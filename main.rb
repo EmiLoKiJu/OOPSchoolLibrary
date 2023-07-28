@@ -5,7 +5,7 @@ require_relative 'book'
 require_relative 'rental'
 require_relative 'app'
 
-@app = App.new()
+@app = App.new
 
 def main(app = nil)
   puts 'Welcome to School Library App!'
@@ -33,7 +33,7 @@ def main(app = nil)
       when 1
         print 'You want to create a student. Give me the age [Input the number for age]: '
         age = gets.chomp.to_i
-        if age == 0 then
+        if age.zero?
           puts 'invalid age. Please try again'
           puts "\n"
           next
@@ -53,8 +53,8 @@ def main(app = nil)
           puts "\n"
           puts 'Person created successfully'
           puts "\n"
-        else 
-          puts 'Invalid choice. Please try again.'
+        else
+          puts 'Invalid choice. Please try again'
         end
       when 2
         print 'You want to create a teacher. Give me the age [Input the number for age]: '
@@ -68,7 +68,7 @@ def main(app = nil)
         puts 'Person created successfully'
         puts "\n"
       else
-        puts 'Invalid choice. Please try again.'
+        puts 'Invalid choice. Please try again'
       end
     when 4
       print 'You want to create a book. Give me the title [Input the title]: '
@@ -80,11 +80,11 @@ def main(app = nil)
       puts 'Book created successfully'
       puts "\n"
     when 5
-      if app.people.empty? then
+      if app.people.empty?
         puts 'No people in the app yet. Add some people first to make a rental'
         puts "\n"
         next
-      elsif app.books.empty? then
+      elsif app.books.empty?
         puts 'No books in the app yet. Add some books first to make a rental'
         puts "\n"
         next
@@ -117,14 +117,14 @@ def main(app = nil)
     when 7
       break
     else
-      puts "Invalid choice. Please try again."
+      puts 'Invalid choice. Please try again'
     end
   end
 end
 
 def show_books(app)
   if app.books.empty?
-    puts "No books in the app yet."
+    puts 'No books in the app yet'
   else
     puts "List of Books:"
     app&.books&.each do |book|
@@ -136,9 +136,9 @@ end
 
 def show_people(app)
   if app.people.empty?
-    puts "No people in the app yet."
+    puts 'No people in the app yet'
   else
-    puts "List of People:"
+    puts 'List of People:'
     app&.people&.each do |person|
       if person.is_a?(Student)
         puts "[Student] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
@@ -171,4 +171,3 @@ def show_people_with_index(app)
 end
 
 main(@app)
-

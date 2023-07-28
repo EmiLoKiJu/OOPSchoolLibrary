@@ -7,6 +7,7 @@ require_relative 'rental'
 
 class App
   attr_reader :people, :books
+
   def initialize
     @books = []
     @people = []
@@ -17,6 +18,7 @@ class App
     student = Student.new(name, age, classroom, parent_permission: parent_permission)
     @people << student
   end
+  
   def create_teacher(name = 'Unknown', age = nil, specialization = nil, parent_permission: true)
     teacher = Teacher.new(name, age, specialization, parent_permission: parent_permission)
     @people << teacher
