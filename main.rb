@@ -12,7 +12,7 @@ require_relative 'app'
 def main(app = nil)
   loop do
     menu
-    choice = gets.chomp.to_i
+    choice = gets.chomp
     case choice
     when 1
       show_books(app)
@@ -86,15 +86,15 @@ end
 
 def insert_person(app)
   print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
-  choice2 = gets.chomp.to_i
+  choice2 = gets.chomp
   case choice2
   when 1
     print 'You want to create a student. Give me the age [Input the number for age]: '
-    age = gets.chomp.to_i
+    age = gets.chomp
     age_zero?(age) ? return : insert_student(app, age)
   when 2
     print 'You want to create a teacher. Give me the age [Input the number for age]: '
-    age = gets.chomp.to_i
+    age = gets.chomp
     age_zero?(age) ? return : insert_teacher(app, age)
   else
     puts 'Invalid choice. Please try again'
@@ -122,10 +122,10 @@ def insert_rental(app)
   end
   puts 'Select a book from the following list by number'
   show_books_with_index(app)
-  book_index = gets.chomp.to_i
+  book_index = gets.chomp
   puts 'Select a person from the following list by number (not id)'
   show_people_with_index(app)
-  people_index = gets.chomp.to_i
+  people_index = gets.chomp
   print 'Give me the date [Input the date in format YYYY/MM/DD]: '
   date = gets.chomp
   app.create_rental(date, app.books[book_index], app.people[people_index])
