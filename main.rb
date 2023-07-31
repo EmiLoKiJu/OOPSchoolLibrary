@@ -48,19 +48,22 @@ def menu
   print "\nEnter your choice: "
 end
 
+# DRY when Y N
 def insert_student(app, age)
   print 'Name [Input the name]: '
   name = gets.chomp
   print 'Has parent permission? [Y/N]: '
-  parent_permission = gets.chomp
-  case parent_permission
+  pp = gets.chomp
+  case pp
   when 'Y'
-    app.create_student(name, age, nil, parent_permission: true)
+    pp = true
   when 'N'
-    app.create_student(name, age, nil, parent_permission: false)
+    pp = false
   else
     puts 'Invalid choice. Please try again'
+    return
   end
+  app.create_student(name, age, nil, parent_permission: pp)
   puts "\nPerson created successfully\n"
 end
 
@@ -84,21 +87,22 @@ def age_zero?(age)
   end
 end
 
+# DRY
 def insert_person(app)
   print 'Do you want to create a student (1) or a teacher (2)? [Input the number]: '
   choice2 = gets.chomp.to_i
   case choice2
   when 1
-    print 'You want to create a student. Give me the age [Input the number for age]: '
-    age = gets.chomp.to_i
-    age_zero?(age) ? return : insert_student(app, age)
+    choice2 = 'student'
   when 2
-    print 'You want to create a teacher. Give me the age [Input the number for age]: '
-    age = gets.chomp.to_i
-    age_zero?(age) ? return : insert_teacher(app, age)
+    choice2 = 'teacher'
   else
     puts 'Invalid choice. Please try again'
+    return
   end
+  print "You want to create a #{choice2}. Give me the age [Input the number for age]: "
+  age = gets.chomp.to_i
+  age_zero?(age) ? return : (choice2 == 'student' ? insert_student(app, age) : insert_teacher(app, age))
 end
 
 def insert_book(app)
