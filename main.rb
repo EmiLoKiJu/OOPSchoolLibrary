@@ -100,7 +100,16 @@ def insert_person(app)
   end
   print "You want to create a #{choice2}. Give me the age [Input the number for age]: "
   age = gets.chomp.to_i
-  age_zero?(age) ? return : (choice2 == 'student' ? insert_teacher(app, age) : insert_student(app, age))
+  if age_zero?(age)
+    return
+  else
+    puts choice2
+    if choice2 == 'student'
+      insert_student(app, age)
+    else
+      insert_teacher(app, age)
+    end
+  end
 end
 
 def insert_book(app)
