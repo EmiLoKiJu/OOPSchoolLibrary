@@ -52,15 +52,17 @@ def insert_student(app, age)
   print 'Name [Input the name]: '
   name = gets.chomp
   print 'Has parent permission? [Y/N]: '
-  parent_permission = gets.chomp
-  case parent_permission
+  pp = gets.chomp
+  case pp
   when 'Y'
-    app.create_student(name, age, nil, parent_permission: true)
+    pp = true
   when 'N'
-    app.create_student(name, age, nil, parent_permission: false)
+    pp = false
   else
     puts 'Invalid choice. Please try again'
+    return
   end
+  app.create_student(name, age, nil, parent_permission: pp)
   puts "\nPerson created successfully\n"
 end
 
