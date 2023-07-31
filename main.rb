@@ -91,24 +91,15 @@ def insert_person(app)
   choice2 = gets.chomp.to_i
   case choice2
   when 1
-    choice2 = 'student'
+    print 'You want to create a student. Give me the age [Input the number for age]: '
+    age = gets.chomp.to_i
+    age_zero?(age) ? return : insert_student(app, age)
   when 2
-    choice2 = 'teacher'
+    print 'You want to create a teacher. Give me the age [Input the number for age]: '
+    age = gets.chomp.to_i
+    age_zero?(age) ? return : insert_teacher(app, age)
   else
     puts 'Invalid choice. Please try again'
-    return
-  end
-  print "You want to create a #{choice2}. Give me the age [Input the number for age]: "
-  age = gets.chomp.to_i
-  if age_zero?(age)
-    return
-  else
-    puts choice2
-    if choice2 == 'student'
-      insert_student(app, age)
-    else
-      insert_teacher(app, age)
-    end
   end
 end
 
