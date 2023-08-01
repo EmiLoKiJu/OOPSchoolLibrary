@@ -264,7 +264,7 @@ class App
       end
     end
   end
-  
+
   def save_changes
     @total_data.each do |data_string, data_adress|
       datajson = JSON.generate(data_adress.call)
