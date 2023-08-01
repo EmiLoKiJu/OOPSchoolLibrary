@@ -10,11 +10,11 @@ class Rental
     person&.add_rental(self)
   end
 
-  def to_json(options = {})
+  def to_json(_options = {})
     {
       date: @date,
       book: @book,
-      person: @person,
+      person: @person
     }.to_json
   end
 end

@@ -13,7 +13,7 @@ class Student < Person
     '¯\\(ツ)/¯'
   end
 
-  def to_json(options = {})
+  def to_json(_options = {})
     {
       type: 'Student',
       name: @name,

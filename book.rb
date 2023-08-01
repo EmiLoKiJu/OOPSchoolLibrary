@@ -11,10 +11,10 @@ class Book
     @rentals << rental
   end
 
-  def to_json(options = {})
+  def to_json(_options = {})
     {
       title: @title,
-      author: @author,
+      author: @author
     }.to_json
   end
 end

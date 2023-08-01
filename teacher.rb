@@ -10,7 +10,7 @@ class Teacher < Person
     true
   end
 
-  def to_json(options = {})
+  def to_json(_options = {})
     {
       type: 'Teacher',
       name: @name,

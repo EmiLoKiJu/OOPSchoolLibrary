@@ -207,43 +207,18 @@ class App
   end
 
   def check_data
-    @total_data.each do |data_string, data_adress|
+    @total_data.each do |data_string, _|
       if File.exist?("stored_data/#{data_string}.json")
         puts 'file exists'
         json_data = File.read("stored_data/#{data_string}.json")
         data = JSON.parse(json_data)
-        if data_string == 'people'
-          data.each do |person_data|
-            if person_data['type'] == 'Student'
-              create_student(
-                person_data['name'],
-                person_data['age'],
-                person_data['classroom'],
-                parent_permission: person_data['parent_permission']
-              )
-            elsif person_data['type'] == 'Teacher'
-              create_teacher(
-                person_data['name'],
-                person_data['age'],
-                person_data['specialization']
-              )
-            end
-          end
-        elsif data_string == 'books'
-          data.each do |book_data|
-            create_book(
-              book_data['title'],
-              book_data['author'],
-            )
-          end
-        elsif data_string == 'rentals'
-          data.each do |rental_data|
-            create_rental(
-              rental_data['date'],
-              rental_data['book'],
-              rental_data['person']
-            )
-          end
+        case data_string
+        when 'people'
+          check_people(data)
+        when 'books'
+          check_books(data)
+        when 'rentals'
+          check_rentals(data)
         end
         puts "Data loaded from 'stored_data/#{data_string}.json'"
       else
@@ -252,6 +227,44 @@ class App
     end
   end
 
+  def check_rentals(data)
+    data.each do |rental_data|
+      create_rental(
+        rental_data['date'],
+        rental_data['book'],
+        rental_data['person']
+      )
+    end
+  end
+
+  def check_books(data)
+    data.each do |book_data|
+      create_book(
+        book_data['title'],
+        book_data['author']
+      )
+    end
+  end
+
+  def check_people(data)
+    data.each do |person_data|
+      if person_data['type'] == 'Student'
+        create_student(
+          person_data['name'],
+          person_data['age'],
+          person_data['classroom'],
+          parent_permission: person_data['parent_permission']
+        )
+      elsif person_data['type'] == 'Teacher'
+        create_teacher(
+          person_data['name'],
+          person_data['age'],
+          person_data['specialization']
+        )
+      end
+    end
+  end
+  
   def save_changes
     @total_data.each do |data_string, data_adress|
       datajson = JSON.generate(data_adress.call)
