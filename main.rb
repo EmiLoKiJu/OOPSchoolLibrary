@@ -33,6 +33,8 @@ def main(app = nil)
     end
   end
 end
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/MethodLength
 
 puts 'Welcome to School Library App!'
 main(@app)
