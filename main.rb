@@ -10,6 +10,7 @@ require_relative 'app'
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/MethodLength
 def main(app = nil)
+  app.check_data
   loop do
     app.menu
     choice = gets.chomp.to_i
@@ -27,6 +28,7 @@ def main(app = nil)
     when 6
       app.show_rentals_by_id
     when 7
+      app.save_changes
       break
     else
       puts 'Invalid choice. Please try again'

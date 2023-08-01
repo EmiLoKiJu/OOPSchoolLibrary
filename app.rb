@@ -4,6 +4,7 @@ require_relative 'teacher'
 require_relative 'classroom'
 require_relative 'book'
 require_relative 'rental'
+require 'json'
 
 # rubocop:disable Metrics/ClassLength
 class App
@@ -13,6 +14,11 @@ class App
     @books = []
     @people = []
     @rentals = []
+    @total_data = {
+      'people' => -> { @people },
+      'rentals' => -> { @rentals },
+      'books' => -> { @books }
+    }
   end
 
   def create_student(name = 'Unknown', age = nil, classroom = nil, parent_permission: true)
@@ -196,6 +202,62 @@ class App
         puts "#{index}. [Teacher] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
       else
         puts "#{index}. #{person.name} (#{person.age} years old)"
+      end
+    end
+  end
+
+  def check_data
+    @total_data.each do |data_string, data_adress|
+      if File.exist?("stored_data/#{data_string}.json")
+        puts 'file exists'
+        json_data = File.read("stored_data/#{data_string}.json")
+        data = JSON.parse(json_data)
+        if data_string == 'people'
+          data.each do |person_data|
+            if person_data['type'] == 'Student'
+              create_student(
+                person_data['name'],
+                person_data['age'],
+                person_data['classroom'],
+                parent_permission: person_data['parent_permission']
+              )
+            elsif person_data['type'] == 'Teacher'
+              create_teacher(
+                person_data['name'],
+                person_data['age'],
+                person_data['specialization']
+              )
+            end
+          end
+        elsif data_string == 'books'
+          data.each do |book_data|
+            create_book(
+              book_data['title'],
+              book_data['author'],
+            )
+          end
+        elsif data_string == 'rentals'
+          data.each do |rental_data|
+            create_rental(
+              rental_data['date'],
+              rental_data['book'],
+              rental_data['person']
+            )
+          end
+        end
+        puts "Data loaded from 'stored_data/#{data_string}.json'"
+      else
+        puts "Data file not found: 'stored_data/#{data_string}.json'"
+      end
+    end
+  end
+
+  def save_changes
+    @total_data.each do |data_string, data_adress|
+      datajson = JSON.generate(data_adress.call)
+      File.open("stored_data/#{data_string}.json", 'w') do |file|
+        file.write(datajson)
+        puts "write to stored_data/#{data_string}.json the data = #{data_adress.call}"
       end
     end
   end

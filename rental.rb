@@ -9,4 +9,12 @@ class Rental
     book&.add_rental(self)
     person&.add_rental(self)
   end
+
+  def to_json(options = {})
+    {
+      date: @date,
+      book: @book,
+      person: @person,
+    }.to_json
+  end
 end
