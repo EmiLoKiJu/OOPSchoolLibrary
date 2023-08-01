@@ -10,4 +10,11 @@ class Book
   def add_rental(rental)
     @rentals << rental
   end
+
+  def to_json(_options = {})
+    {
+      title: @title,
+      author: @author
+    }.to_json
+  end
 end
