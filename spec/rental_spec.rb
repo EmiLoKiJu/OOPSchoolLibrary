@@ -1,14 +1,12 @@
 require 'rspec'
 require_relative '../rental.rb'
-require_relative '../book.rb'
-require_relative '../person.rb'
 
 RSpec.describe Rental do
-  let(:book) { Book.new('Book Title', 'Book Author') }
-  let(:person) { Person.new('John Doe', 30) }
+  let(:book) { instance_double(Book, title: 'Book Title', author: 'Book Author', add_rental: nil) }
+  let(:person) { instance_double(Person, id: 'person_id', name: 'John Doe', age: 30, parent_permission: true, add_rental: nil) }
   let(:rental) { Rental.new }
 
-  describe '#initialize' do
+  context '#initialize' do
     it 'should initialize with default values when not provided' do
       expect(rental.date).to be_nil
       expect(rental.book).to be_nil
@@ -24,7 +22,7 @@ RSpec.describe Rental do
     end
   end
 
-  describe '#to_json' do
+  context '#to_json' do
     it 'should return JSON representation of the rental object' do
       rental = Rental.new('2023-08-02', book, person)
       expected_json = {
