@@ -16,8 +16,8 @@ class App
     @rentals = []
     @total_data = {
       'people' => -> { @people },
-      'rentals' => -> { @rentals },
-      'books' => -> { @books }
+      'books' => -> { @books },
+      'rentals' => -> { @rentals }
     }
   end
 
@@ -42,7 +42,7 @@ class App
   end
 
   def rentals(person_id)
-    @rentals.select { |rental| rental.person.id == person_id }
+    @rentals.select { |rental| rental.person == person_id }
   end
 
   # add code
@@ -148,13 +148,14 @@ class App
   def show_rentals_by_id
     print 'ID of person: '
     person_id = gets.chomp
-    rentals = rentals(person_id)
-    if rentals.empty?
+    rentals_for_id = rentals(person_id)
+    if rentals_for_id.empty?
       puts "No rentals found for a person with this ID: #{person_id}"
     else
       puts 'Rentals:'
-      rentals.each do |rental|
-        puts "Date: #{rental.date}, Book: \"#{rental.book.title}\" by #{rental.book.author}"
+      rentals_for_id.each do |rental|
+        book_rented = @books.find { |book| book.title == rental.book }
+        puts "Date: #{rental.date}, Book: \"#{book_rented.title}\" by #{book_rented.author}"
       end
     end
     puts "\n"
@@ -231,8 +232,8 @@ class App
     data.each do |rental_data|
       create_rental(
         rental_data['date'],
-        rental_data['book'],
-        rental_data['person']
+        @books.find { |book| book.title == rental_data['book'] },
+        @people.find { |person| person.id == rental_data['person'] }
       )
     end
   end
