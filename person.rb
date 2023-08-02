@@ -2,7 +2,7 @@ require 'securerandom'
 require_relative 'nameable'
 
 class Person < Nameable
-  attr_reader :id, :name, :age
+  attr_reader :id, :name, :age, :parent_permission
 
   def initialize(name = 'Unknown', age = nil, parent_permission: true)
     super()
