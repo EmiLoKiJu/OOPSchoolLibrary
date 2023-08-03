@@ -7,7 +7,7 @@ describe Teacher do
   end
   context 'For teacher we can test all attribute and json method and also can I use your service method' do
     it 'Ensure the value of attribute' do
-      expect(@teacher_class.name).to eq('Pierre')
+      expect(@teacher_class.name).to eq('Jean')
       expect(@teacher_class.age).to eq 40
       expect(@teacher_class.specialization).to eq('Math')
       expect(@teacher_class.parent_permission).to be true
@@ -16,7 +16,7 @@ describe Teacher do
     it 'Json method' do
       expected_json = {
         type: 'Teacher',
-        name: 'Pierre',
+        name: 'Jean',
         age: 40,
         specialization: 'Math',
         parent_permission: true
