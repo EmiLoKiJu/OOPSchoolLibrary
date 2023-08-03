@@ -1,9 +1,11 @@
 require 'rspec'
-require_relative '../rental.rb'
+require_relative '../rental'
 
 RSpec.describe Rental do
   let(:book) { instance_double(Book, title: 'Book Title', author: 'Book Author', add_rental: nil) }
-  let(:person) { instance_double(Person, id: 'person_id', name: 'John Doe', age: 30, parent_permission: true, add_rental: nil) }
+  let(:person) do
+    instance_double(Person, id: 'person_id', name: 'John Doe', age: 30, parent_permission: true, add_rental: nil)
+  end
   let(:rental) { Rental.new }
 
   context '#initialize' do

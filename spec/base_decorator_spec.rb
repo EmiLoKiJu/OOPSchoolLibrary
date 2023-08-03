@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../base_decorator.rb'
+require_relative '../base_decorator'
 
 RSpec.describe BaseDecorator do
   let(:nameable_mock) { double('Nameable') }

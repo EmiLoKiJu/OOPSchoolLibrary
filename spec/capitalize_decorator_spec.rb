@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../capitalize_decorator.rb'
+require_relative '../capitalize_decorator'
 
 RSpec.describe CapitalizeDecorator do
   let(:nameable_mock) { double('Nameable') }

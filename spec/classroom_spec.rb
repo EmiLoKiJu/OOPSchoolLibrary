@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../classroom.rb'
+require_relative '../classroom'
 
 RSpec.describe Classroom do
   let(:classroom) { Classroom.new }
