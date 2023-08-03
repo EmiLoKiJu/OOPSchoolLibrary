@@ -1,11 +1,11 @@
 require 'rspec'
 require_relative '../classroom.rb'
-require_relative '../student.rb'
 
 RSpec.describe Classroom do
   let(:classroom) { Classroom.new }
+  let(:student) { instance_double(Student, id: 'student_id', classroom: nil, to_json: '') }
 
-  describe '#initialize' do
+  context '#initialize' do
     it 'should initialize with a default label when not provided' do
       expect(classroom.label).to be_nil
     end
@@ -20,9 +20,9 @@ RSpec.describe Classroom do
     end
   end
 
-  describe '#add_student' do
+  context '#add_student' do
     it 'should add the student to the students array' do
-      student = Student.new
+      allow(student).to receive(:classroom=)
       classroom.add_student(student)
       expect(classroom.students).to include(student.id)
     end

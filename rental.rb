@@ -4,7 +4,7 @@ class Rental
 
   def initialize(date = nil, book = nil, person = nil)
     @date = date
-    @book = book.title
+    @book = book&.title
     @person = person&.id
     book&.add_rental(self)
     person&.add_rental(self)
