@@ -1,6 +1,5 @@
 require_relative '../trimmer_decorator'
 
-
 RSpec.describe TrimmerDecorator do
   let(:nameable_object) { double('Nameable', correct_name: 'VeryLongName') }
   let(:decorator) { TrimmerDecorator.new(nameable_object) }
